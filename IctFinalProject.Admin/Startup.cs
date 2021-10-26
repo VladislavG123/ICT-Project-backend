@@ -40,7 +40,7 @@ namespace IctFinalProject.Admin
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => { options.LoginPath = "/Auth"; });
 
-            services.AddTransient<CookieAuthenticationService>();
+            services.AddScoped<CookieAuthenticationService>();
 
 
             

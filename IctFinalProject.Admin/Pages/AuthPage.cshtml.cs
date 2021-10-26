@@ -42,8 +42,7 @@ namespace IctFinalProject.Admin.Pages
             }
             catch (ArgumentException e)
             {
-                ViewData["ShowAlert"] = true;
-                return Page();
+                throw e;
             }
             
             return Redirect("/");

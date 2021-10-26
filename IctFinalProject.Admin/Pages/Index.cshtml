@@ -1,13 +1,203 @@
 ﻿@page
+@using IctFinalProject.Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Layout = null;
 }
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 <style>
-    .test {
-    display: flex;
-    justify-content: center;
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .top-logo {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .nav {
+        background-color: lightgray;
+        height: 50px;
+        
+        display: flex;
+        justify-content: center;
+    }
+    
+    .nav-btn {
+        text-decoration: none;
+        color: #3b3b3b;
+        
+        display: flex;
+        align-items: center;
+        
+        margin: 0 10px;
+    }
+    
+    .bold {
+        font-weight: bold;
+    }
+    
+    .top-menu{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .top-menu>h1 {
+        display: flex;
+        justify-content: left;
+        
+        margin-left: 50px;
+    }
+    
+    .top-menu>a {
+        
+        margin-right: 50px;
+        
+        background: #1b6ec2;
+        
+    }
+    
+    .btn {
+        padding: 0 20px;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+            
+        display: flex;
+        align-items: center;
+    }
+    
+    .table {
+        margin: 50px 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .table-row {
+        display: flex;
+        justify-content: space-around;
+        height: 40px;
+    }
+    
+    .table-cell {
+        display: flex;
+        align-items: center;
+        width: 50px;
+    }
+    
+    .gray-row{
+        background-color: lightgray;
+    }
+    .btn-delete {
+        background: #da2333;
+        padding: 5px 10px;
     }
 </style>
+<body>
 
-<div class="test"><img src="asf" alt=""></div>
+<div class="top-logo">
+    <img src="~/images/logo.png" height="150" alt="">
+</div>
+
+<div class="nav">
+    <a href="" class="nav-btn bold">Products</a>
+    <a href="" class="nav-btn">Orders</a>
+</div>
+
+<div class="top-menu">
+    <h1>Products in the system</h1>
+    <a href="#" class="btn">Add</a>
+</div>
+
+<div class="table">
+    <div class="table-row gray-row">
+        <div class="table-cell">
+            <h3>Title</h3>
+        </div>
+        <div class="table-cell">
+            <h3>Details</h3>
+        </div>
+        <div class="table-cell">
+            <h3>Price</h3>
+        </div>
+        <div class="table-cell">
+            <h3>IsActive</h3>
+        </div>
+        <div class="table-cell">
+            <h3>Action</h3>
+        </div>
+    </div>
+    @{
+        int i = 1;
+    }
+    @foreach (var product in new List<Product>
+    {
+        new Product
+        {
+            Title = "Bread",
+            Details = "Black",
+            Price = 200,
+            IsActive = true,
+        },
+        new Product
+        {
+            Title = "Rise",
+            Details = "White",
+            Price = 2400,
+            IsActive = false,
+        },
+        new Product
+        {
+            Title = "Lagman",
+            Details = "Mongol",
+            Price = 22400,
+            IsActive = true,
+        },
+        new Product
+        {
+            Title = "Plov",
+            Details = "Uigur",
+            Price = 5000,
+            IsActive = true,
+        },
+        new Product
+        {
+            Title = "Shasluck",
+            Details = "Utka",
+            Price = 9000,
+            IsActive = true,
+        },
+    }){
+        <div class="table-row @(i++ % 2 == 0 ? "gray-row": "")">
+            <div class="table-cell">
+                <p>@product.Title</p>
+            </div>
+            <div class="table-cell">
+                <p>@product.Details</p>
+            </div>
+            <div class="table-cell">
+                <p>@product.Price</p>
+            </div>
+            <div class="table-cell">
+                <p>@(product.IsActive ? "Active" : "Inactive")</p>
+            </div>
+            <div class="table-cell">
+                <a href="" class="btn btn-delete">DELETE</a>
+            </div>
+        </div>
+        
+    }
+</div>
+
+</body>
+</html>
