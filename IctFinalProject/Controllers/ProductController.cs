@@ -26,7 +26,7 @@ namespace IctFinalProject.Controllers
         /// <param name="parameter"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromBody] GetAllProductParameter parameter)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllProductParameter parameter)
         {
             var products = await _context.Products
                 .Where(x => (parameter.ShowInactive || x.IsActive) && !x.IsDeleted)
@@ -93,6 +93,7 @@ namespace IctFinalProject.Controllers
 
             product.IsActive = !product.IsActive;
 
+            await _context.SaveChangesAsync();
             return Ok("Changed");
         }
         

@@ -21,7 +21,8 @@ namespace IctFinalProject.Controllers
         }
 
         [HttpPost("{userId:int}")]
-        public async Task<IActionResult> CreateUsersOrder(int userId, [FromQuery] DateTime deliveryTime)
+        public async Task<IActionResult> CreateUsersOrder(int userId, [FromBody] DateTime deliveryTime, 
+            [FromBody] string phoneNumber)
         {
             var activeOrderId = await
                 (from order in _context.Orders
