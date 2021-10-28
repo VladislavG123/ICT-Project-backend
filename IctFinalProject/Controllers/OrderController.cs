@@ -21,8 +21,7 @@ namespace IctFinalProject.Controllers
         }
 
         [HttpPost("{userId:int}")]
-        public async Task<IActionResult> CreateUsersOrder(int userId, [FromBody] DateTime deliveryTime, 
-            [FromBody] string phoneNumber)
+        public async Task<IActionResult> CreateUsersOrder(int userId, OrderCreationDto orderCreationDto)
         {
             var activeOrderId = await
                 (from order in _context.Orders
@@ -48,8 +47,8 @@ namespace IctFinalProject.Controllers
             _context.Orders.Add(new Order()
             {
                 CartId = usersCart.Id,
-                DeliveryTime = deliveryTime,
-                PhoneNumber = phoneNumber
+                DeliveryTime = orderCreationDto.DeliveryTime,
+                PhoneNumber = orderCreationDto.PhoneNumber
             });
 
             await _context.SaveChangesAsync();
@@ -72,19 +71,23 @@ namespace IctFinalProject.Controllers
                     DeliveryTime = order.DeliveryTime,
                     OrderStatus = order.OrderStatus,
                     PhoneNumber = order.PhoneNumber
-                }).FirstOrDefaultAsync();
+                }).ToListAsync();
 
             if (result is null)
             {
                 return BadRequest("No active order for this user");
             }
 
-            result.Products = await
-                (from product in _context.Products
+            foreach (var item in result)
+            {
+                item.Products = await (
+                    from product in _context.Products
                     join productInCart in _context.ProductsInCarts on product.Id equals productInCart.ProductId
                     join cart in _context.Carts on productInCart.CartId equals cart.Id
-                    where cart.UserId.Equals(userid)
+                    join order in _context.Orders on cart.Id equals order.CartId
+                    where item.OrderId.Equals(order.Id)
                     select product).ToListAsync();
+            }
 
             return Ok(result);
         }
@@ -132,7 +135,7 @@ namespace IctFinalProject.Controllers
             }
 
             order.OrderStatus = orderStatus;
-
+            
             await _context.SaveChangesAsync();
             return Ok();
         }
