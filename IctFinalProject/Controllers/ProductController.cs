@@ -28,11 +28,15 @@ namespace IctFinalProject.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductParameter parameter)
         {
-            var products = await _context.Products
-                .Where(x => (parameter.ShowInactive || x.IsActive) && !x.IsDeleted)
-                .ToListAsync();
+            var products = _context.Products
+                .Where(x => (parameter.ShowInactive || x.IsActive) && !x.IsDeleted);
 
-            return Ok(products);
+            if (parameter.Category != "")
+            {
+                products = products.Where(x => x.Category.ToLower().Equals(parameter.Category.ToLower()));
+            }
+            
+            return Ok(await products.ToListAsync());
         }
 
         /// <summary>
@@ -57,7 +61,8 @@ namespace IctFinalProject.Controllers
             {
                 Title = parameter.Title,
                 Details = parameter.Details,
-                Price = parameter.Price
+                Price = parameter.Price,
+                Category = parameter.Category
             });
 
             await _context.SaveChangesAsync();
@@ -112,6 +117,14 @@ namespace IctFinalProject.Controllers
 
             return Ok("Changed");
         }
-        
+
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await _context.Products.GroupBy(x => x.Category)
+                .Select(x => x.Key).ToListAsync();
+
+            return Ok(categories);
+        }
     }
 }

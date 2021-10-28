@@ -8,6 +8,7 @@ namespace IctFinalProject.Models
         public string Title { get; set; }
         public string Details { get; set; }
         public decimal Price { get; set; }
+        public string Category { get; set; }
         
         /// <summary>
         /// Can user order this product

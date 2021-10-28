@@ -1,0 +1,85 @@
+.login_form {
+    /*background: blue;
+    width: 400px;
+    height: 400px;
+    margin: 400px 400px 500px 500px;*/
+    position: absolute;
+    height: 490px;
+    width: 389px;
+    left: 550px;
+    top: 150px;
+    border-radius: 10px;
+    background: #E4E4E4;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+img {
+    position: absolute;
+    height: 212px;
+    width: 212px;
+    left: 90px;
+    top: 25px;
+    border-radius: 250px;
+    /*background: url(as' hana (1).png); border-radius: 250px;)*/
+}
+p {
+    position: absolute;
+    height: 50px;
+    width: 102px;
+    left: 150px;
+    top: 250px;
+    display: flex;
+    align-items: center;
+}
+input {
+    position: absolute;
+    width: 266px;
+    height: 45px;
+    left: 65px;
+    top: 350px;
+    background: #FFFFFF;
+    border: 0 solid #363636;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+button {
+    position: absolute;
+    width: 266px;
+    border: none;
+    height: 45px;
+    left: 65px;
+    top: 425px;
+    background: #177EC8;
+    -webkit-box-shadow: 0px 5px 28px 8px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 5px 28px 8px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.34);
+}
+
+button:hover {
+    background: #1267a1;
+    -webkit-box-shadow: 0px 15px 28px 8px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 0px 15px 28px 8px rgba(0, 0, 0, 0.34);
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.34);
+}
+
+.login_text {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: center;
+    left: 100px;
+    top: -20px;
+    color: white
+}
+.password_text {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+}

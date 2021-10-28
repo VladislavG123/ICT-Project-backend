@@ -8,6 +8,7 @@ namespace IctFinalProject.DTOs
     {
         public Guid OrderId { get; set; }
         public int OrderCode { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime DeliveryTime { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public List<Product> Products { get; set; }

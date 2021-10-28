@@ -49,6 +49,7 @@ namespace IctFinalProject.Controllers
             {
                 CartId = usersCart.Id,
                 DeliveryTime = deliveryTime,
+                PhoneNumber = phoneNumber
             });
 
             await _context.SaveChangesAsync();
@@ -70,6 +71,7 @@ namespace IctFinalProject.Controllers
                     OrderCode = order.OrderCode,
                     DeliveryTime = order.DeliveryTime,
                     OrderStatus = order.OrderStatus,
+                    PhoneNumber = order.PhoneNumber
                 }).FirstOrDefaultAsync();
 
             if (result is null)
@@ -102,6 +104,7 @@ namespace IctFinalProject.Controllers
                     OrderCode = order.OrderCode,
                     DeliveryTime = order.DeliveryTime,
                     OrderStatus = order.OrderStatus,
+                    PhoneNumber = order.PhoneNumber
                 }).ToListAsync();
 
             foreach (var order in orders)

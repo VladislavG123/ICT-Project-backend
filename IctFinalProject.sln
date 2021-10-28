@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IctFinalProject", "IctFinal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IctFinalProject.Admin", "IctFinalProject.Admin\IctFinalProject.Admin.csproj", "{8163E7AF-10A2-4316-8754-3634EA3C65B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ictFinalProject.WebAdmin", "ictFinalProject.WebAdmin\ictFinalProject.WebAdmin.csproj", "{206919E6-5654-4C81-AF86-8092FCFBBECF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{8163E7AF-10A2-4316-8754-3634EA3C65B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8163E7AF-10A2-4316-8754-3634EA3C65B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8163E7AF-10A2-4316-8754-3634EA3C65B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{206919E6-5654-4C81-AF86-8092FCFBBECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206919E6-5654-4C81-AF86-8092FCFBBECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206919E6-5654-4C81-AF86-8092FCFBBECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206919E6-5654-4C81-AF86-8092FCFBBECF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
