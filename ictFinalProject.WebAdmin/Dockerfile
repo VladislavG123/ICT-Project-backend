@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj", "ictFinalProject.WebAdmin/"]
 COPY ["IctFinalProject/IctFinalProject.csproj", "IctFinalProject/"]
-RUN dotnet restore "ictFinalProject/ictFinalProject.WebAdmin.csproj"
+RUN dotnet restore "ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj"
 COPY . .
 WORKDIR "/src/IctFinalProject.WebAdmin"
 RUN dotnet build "ictFinalProject.WebAdmin.csproj" -c Release -o /app/build
