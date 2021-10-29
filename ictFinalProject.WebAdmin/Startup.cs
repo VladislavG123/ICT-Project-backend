@@ -26,6 +26,9 @@ namespace ictFinalProject.WebAdmin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => { options.LoginPath = "/auth"; });
+            
             services.AddHttpClient<HttpService>(client =>
             {
                 var apiUrl = new Uri(Configuration["apiUrl"]);
@@ -36,13 +39,9 @@ namespace ictFinalProject.WebAdmin
             {
                 ServerCertificateCustomValidationCallback = (request, certificate, chain, errors) => true
             });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => { options.LoginPath = "/Auth"; });
-
+            
             services.AddScoped<CookieAuthenticationService>();
-
-
+            
             services.AddControllersWithViews();
             
             services.AddHttpContextAccessor();
@@ -62,12 +61,14 @@ namespace ictFinalProject.WebAdmin
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+            
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

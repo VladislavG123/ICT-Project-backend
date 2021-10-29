@@ -8,10 +8,12 @@ using IctFinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ictFinalProject.WebAdmin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
 namespace ictFinalProject.WebAdmin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -25,24 +27,18 @@ namespace ictFinalProject.WebAdmin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var response = await _httpService.Get($"api/Subject/");
+            var response = await _httpService.Get($"products?ShowInactive=true");
 
-            var products = response.Content.ReadFromJsonAsync<Product>();
+            var products = await response.Content.ReadFromJsonAsync<List<Product>>();
 
             ViewData["Products"] = products;
             
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddProductGet()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

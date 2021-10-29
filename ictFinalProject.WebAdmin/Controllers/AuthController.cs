@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using IctFinalProject.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ictFinalProject.WebAdmin.Controllers
 {
@@ -34,14 +35,15 @@ namespace ictFinalProject.WebAdmin.Controllers
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new ArgumentException("PhoneNumber or password is invalid");
+                ViewData["Error"] = "PhoneNumber or password is invalid";
+                return RedirectToAction("Index");
             }
 
             var token = await response.Content.ReadAsStringAsync();
 
-            var isAuthenticated = await _authenticationService.AuthenticateUser(token);
+            await _authenticationService.AuthenticateUser(token);
             
-            return RedirectToRoute("/Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

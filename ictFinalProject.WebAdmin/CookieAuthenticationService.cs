@@ -14,19 +14,18 @@ namespace ictFinalProject.WebAdmin
     public class CookieAuthenticationService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly HttpService _httpService;
 
-        public CookieAuthenticationService(IHttpContextAccessor httpContext, HttpService httpService)
+        public CookieAuthenticationService(IHttpContextAccessor httpContext)
         {
             this._httpContextAccessor = httpContext;
-            _httpService = httpService;
         }
 
-        public async Task<bool> AuthenticateUser(string token)
+        public async Task AuthenticateUser(string token)
         {
             var claims = new List<Claim>
             {
-                new(ClaimTypes.Hash, token)
+                new(ClaimTypes.Hash, token),
+                new(ClaimTypes.Name, "Admin")
             };
 
             var claimsIdentity = new ClaimsIdentity(
@@ -43,8 +42,6 @@ namespace ictFinalProject.WebAdmin
                 Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
-            return true;
         }
 
         public async void SignOutUser()

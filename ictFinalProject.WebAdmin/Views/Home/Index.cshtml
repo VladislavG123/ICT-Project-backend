@@ -3,9 +3,8 @@
     ViewData["Title"] = "Home page";
     Layout = null;
 
-    var products = ViewData["Products"] as List<Product>;
-
-    var asd = new List<Product>
+    
+    var temp = new List<Product>
     {
         new Product
         {
@@ -43,6 +42,9 @@
             IsActive = true,
         },
     };
+
+    var products = (ViewData["Products"] as List<Product>) ?? temp;
+
  }
 <!doctype html>
 <html lang="en">
