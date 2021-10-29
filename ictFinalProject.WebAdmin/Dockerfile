@@ -11,7 +11,7 @@ COPY ["ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj", "ictFinalProje
 COPY ["IctFinalProject/IctFinalProject.csproj", "IctFinalProject/"]
 RUN dotnet restore "ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj"
 COPY . .
-WORKDIR "/src/IctFinalProject.WebAdmin"
+WORKDIR "/src/ictFinalProject.WebAdmin"
 RUN dotnet build "ictFinalProject.WebAdmin.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "ictFinalProject.WebAdmin.csproj" -c Release -o /app/publish
