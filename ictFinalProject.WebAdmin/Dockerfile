@@ -7,7 +7,7 @@ ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["ictFinalProject/ictFinalProject.WebAdmin.csproj", "IctFinalProject.WebAdmin/"]
+COPY ["ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj", "ictFinalProject.WebAdmin/"]
 COPY ["IctFinalProject/IctFinalProject.csproj", "IctFinalProject/"]
 RUN dotnet restore "ictFinalProject/ictFinalProject.WebAdmin.csproj"
 COPY . .
