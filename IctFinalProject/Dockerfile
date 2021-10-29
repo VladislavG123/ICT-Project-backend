@@ -8,7 +8,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["IctFinalProject/IctFinalProject.csproj", "IctFinalProject/"]
-RUN dotnet restore "IctFinalProject/IctFinalProject.csproj"
+RUN dotnet restore "ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj"
 COPY . .
 WORKDIR "/src/IctFinalProject"
 RUN dotnet build "IctFinalProject.csproj" -c Release -o /app/build
