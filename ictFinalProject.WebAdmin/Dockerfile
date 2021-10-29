@@ -1,21 +1,17 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:5.0 AS base
+﻿# syntax=docker/dockerfile:1
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
-ARG BUILD_CONFIGURATION=Release
-ENV ASPNETCORE_ENVIRONMENT=Development
-ENV DOTNET_USE_POLLING_FILE_WATCHER=true  
-ENV ASPNETCORE_URLS=http://+:80  
-EXPOSE 80
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
-COPY ["ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj", "ictFinalProject.WebAdmin/"]
-RUN dotnet restore "ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj"
-COPY . .
-WORKDIR "/src/ictFinalProject.WebAdmin"
-RUN dotnet build "ictFinalProject.WebAdmin.csproj" -c Release -o /app/build
-FROM build AS publish
-RUN dotnet publish "ictFinalProject.WebAdmin.csproj" -c Release -o /app/publish
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ictFinalProject.WebAdmin.dll"]
 
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY ../engine/examples ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "ictFinalProject.WebAdmin.dll"]
