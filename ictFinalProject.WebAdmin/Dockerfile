@@ -8,7 +8,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj", "ictFinalProject.WebAdmin/"]
-COPY ["IctFinalProject/IctFinalProject.csproj", "IctFinalProject/"]
+COPY ["IctFinalProject.Models/IctFinalProject.Models.csproj", "IctFinalProject.Models/"]
 RUN dotnet restore "ictFinalProject.WebAdmin/ictFinalProject.WebAdmin.csproj"
 COPY . .
 WORKDIR "/src/ictFinalProject.WebAdmin"
