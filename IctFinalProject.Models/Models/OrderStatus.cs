@@ -1,4 +1,4 @@
-namespace IctFinalProject.Models
+namespace IctFinalProject.Models.Models
 {
     public enum OrderStatus
     {

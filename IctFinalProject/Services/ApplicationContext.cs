@@ -1,4 +1,4 @@
-using IctFinalProject.Models;
+using IctFinalProject.Models.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace IctFinalProject.Services

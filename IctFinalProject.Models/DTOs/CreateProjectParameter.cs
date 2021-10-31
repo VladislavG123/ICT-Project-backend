@@ -1,4 +1,4 @@
-namespace IctFinalProject.DTOs
+namespace IctFinalProject.Models.DTOs
 {
     public class CreateProjectParameter
     {

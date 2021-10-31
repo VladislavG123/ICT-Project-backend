@@ -1,7 +1,4 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace IctFinalProject.DTOs
+namespace IctFinalProject.Models.DTOs
 {
     public class OrderCreationDto
     {

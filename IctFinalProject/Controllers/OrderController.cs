@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using IctFinalProject.DTOs;
-using IctFinalProject.Models;
+using IctFinalProject.Models.DTOs;
+using IctFinalProject.Models.Models;
 using IctFinalProject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

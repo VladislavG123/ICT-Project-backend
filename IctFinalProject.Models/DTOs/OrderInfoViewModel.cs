@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using IctFinalProject.Models;
+using IctFinalProject.Models.Models;
 
-namespace IctFinalProject.DTOs
+namespace IctFinalProject.Models.DTOs
 {
     public class OrderInfoViewModel
     {

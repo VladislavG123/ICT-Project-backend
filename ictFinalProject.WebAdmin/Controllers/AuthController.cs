@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using IctFinalProject.DTOs;
+using IctFinalProject.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

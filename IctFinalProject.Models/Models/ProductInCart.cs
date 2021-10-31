@@ -1,6 +1,6 @@
 using System;
 
-namespace IctFinalProject.Models
+namespace IctFinalProject.Models.Models
 {
     public class ProductInCart
     {
