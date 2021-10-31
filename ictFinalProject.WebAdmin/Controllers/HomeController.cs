@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ictFinalProject.WebAdmin.Models;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
 
 namespace ictFinalProject.WebAdmin.Controllers
 {

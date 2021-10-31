@@ -5,12 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\IctFinalProject\IctFinalProject.csproj" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\LoginPage.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Auth\LoginPage.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Auth\Index.cshtml" />
+      <ProjectReference Include="..\IctFinalProject.Models\IctFinalProject.Models.csproj" />
     </ItemGroup>
 
 </Project>
