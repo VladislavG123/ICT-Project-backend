@@ -74,7 +74,7 @@ namespace IctFinalProject.Controllers
                     DeliveryTime = order.DeliveryTime,
                     OrderStatus = order.OrderStatus,
                     PhoneNumber = order.PhoneNumber
-                }).ToListAsync();
+                }).Distinct().ToListAsync();
 
             if (result is null)
             {
