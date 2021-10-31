@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 
 namespace ictFinalProject.WebAdmin.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

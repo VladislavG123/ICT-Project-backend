@@ -28,7 +28,7 @@ namespace IctFinalProject.Controllers
                     join cart in _context.Carts on order.CartId equals cart.Id
                     orderby order.CreationDate
                     where cart.UserId.Equals(userId) && 
-                          (order.OrderStatus != OrderStatus.InProgress || order.OrderStatus != OrderStatus.Ready)
+                          (order.OrderStatus == OrderStatus.InProgress || order.OrderStatus == OrderStatus.Ready)
                     select order).FirstOrDefaultAsync();
 
             if (activeOrderId is not null)
@@ -62,8 +62,8 @@ namespace IctFinalProject.Controllers
             var result = await (
                 from order in _context.Orders
                 join cart in _context.Carts on order.CartId equals cart.Id
-                where cart.UserId.Equals(userid) && 
-                      (order.OrderStatus == OrderStatus.Ready || order.OrderStatus == OrderStatus.InProgress)
+                where cart.UserId.Equals(userid)
+                orderby order.CreationDate
                 select new OrderInfoViewModel
                 {
                     OrderId = order.Id,

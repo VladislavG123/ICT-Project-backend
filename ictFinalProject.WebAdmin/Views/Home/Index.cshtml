@@ -2,48 +2,8 @@
 @{
     ViewData["Title"] = "Home page";
     Layout = null;
-
     
-    var temp = new List<Product>
-    {
-        new Product
-        {
-            Title = "Bread",
-            Details = "Black",
-            Price = 200,
-            IsActive = true,
-        },
-        new Product
-        {
-            Title = "Rise",
-            Details = "White",
-            Price = 2400,
-            IsActive = false,
-        },
-        new Product
-        {
-            Title = "Lagman",
-            Details = "Mongol",
-            Price = 22400,
-            IsActive = true,
-        },
-        new Product
-        {
-            Title = "Plov",
-            Details = "Uigur",
-            Price = 5000,
-            IsActive = true,
-        },
-        new Product
-        {
-            Title = "Shasluck",
-            Details = "Utka",
-            Price = 9000,
-            IsActive = true,
-        },
-    };
-
-    var products = (ViewData["Products"] as List<Product>) ?? temp;
+    var products = ViewData["Products"] as List<Product>;
 
  }
 <!doctype html>
@@ -193,10 +153,10 @@
                 <p>@product.Price</p>
             </div>
             <div class="table-cell">
-                <p>@(product.IsActive ? "Active" : "Inactive")</p>
+                <a>@(product.IsActive ? "Active" : "Inactive")</a>
             </div>
             <div class="table-cell">
-                <a href="" class="btn btn-delete">DELETE</a>
+                <a href="delete/@product.Id" class="btn btn-delete">DELETE</a>
             </div>
         </div>
         

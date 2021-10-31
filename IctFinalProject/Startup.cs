@@ -31,9 +31,13 @@ namespace IctFinalProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(x =>
-                x.UseInMemoryDatabase(Configuration.GetConnectionString("InMemory")));
+            // services.AddDbContext<ApplicationContext>(x =>
+            //     x.UseInMemoryDatabase(Configuration.GetConnectionString("InMemory")));
 
+            services.AddDbContext<ApplicationContext>(x =>
+                x.UseNpgsql(Configuration.GetConnectionString("NpgSql")));
+
+            
             #region Jwt Configuration
 
             var secrets = "a79e69e5-1327-4bc3-a4b1-bb02e1d4a2b2";
