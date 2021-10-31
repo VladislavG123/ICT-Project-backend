@@ -62,13 +62,13 @@ namespace ictFinalProject.WebAdmin
             }
 
             app.UseStaticFiles();
-
-            app.UseCookiePolicy();
             
+            app.UseCookiePolicy();
+
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

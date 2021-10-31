@@ -83,6 +83,8 @@ namespace IctFinalProject.Controllers
 
             product.IsDeleted = true;
 
+            await _context.SaveChangesAsync();
+            
             return Ok("Deleted");
         }
 

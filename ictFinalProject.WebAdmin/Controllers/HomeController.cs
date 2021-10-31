@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using IctFinalProject.DTOs;
 using IctFinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,13 +18,17 @@ namespace ictFinalProject.WebAdmin.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HttpService _httpService;
+        private readonly CookieAuthenticationService _authenticationService;
 
-        public HomeController(ILogger<HomeController> logger, HttpService httpService)
+        public HomeController(ILogger<HomeController> logger, HttpService httpService, 
+            CookieAuthenticationService authenticationService)
         {
             _logger = logger;
             _httpService = httpService;
+            _authenticationService = authenticationService;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var response = await _httpService.Get($"products?ShowInactive=true");
@@ -35,9 +40,36 @@ namespace ictFinalProject.WebAdmin.Controllers
             return View();
         }
 
-        public IActionResult AddProductGet()
+        [Authorize]
+        [HttpGet("/change-activity/{id:guid}")]
+        public async Task<IActionResult> ChangeActivity(Guid id)
         {
-            return View();
+            var claims = _authenticationService.DecryptClaim();
+            var token = claims.FirstOrDefault()?.Value;
+            
+            var response = await _httpService.Patch($"products/{id}/change_isActive", null, token);
+
+            if (response.IsSuccessStatusCode) return RedirectToAction("Index", "Home");
+           
+            ViewData["Error"] = "Error";
+           
+            return RedirectToAction("Index", "Home");
+        }
+        
+        [Authorize]
+        [HttpGet("/delete/{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var claims = _authenticationService.DecryptClaim();
+            var token = claims.FirstOrDefault()?.Value;
+            
+            var response = await _httpService.Delete($"products/{id}", token);
+
+            if (response.IsSuccessStatusCode) return RedirectToAction("Index", "Home");
+           
+            ViewData["Error"] = "Error";
+           
+            return RedirectToAction("Index", "Home");
         }
     }
 }

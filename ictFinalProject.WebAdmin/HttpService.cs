@@ -88,6 +88,13 @@ namespace ictFinalProject.WebAdmin
             return await SendRequest(request, token);
         }
 
+        public async Task<HttpResponseMessage> Delete(string uri, string token = null)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
+
+            return await SendRequest(request, token);
+        }
+
         // helper methods
         private async Task<HttpResponseMessage> SendRequest(HttpRequestMessage request, string token = null)
         {

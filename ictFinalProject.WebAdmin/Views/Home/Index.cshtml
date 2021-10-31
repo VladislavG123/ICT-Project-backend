@@ -111,13 +111,13 @@
 </div>
 
 <div class="nav">
-    <a href="" class="nav-btn bold">Products</a>
-    <a href="" class="nav-btn">Orders</a>
+    <a href="/" class="nav-btn bold">Products</a>
+    <a href="/order" class="nav-btn">Orders</a>
 </div>
 
 <div class="top-menu">
     <h1>Products in the system</h1>
-    <a href="#" class="btn">Add</a>
+    <a href="/add-product" class="btn">Add</a>
 </div>
 
 <div class="table">
@@ -130,6 +130,9 @@
         </div>
         <div class="table-cell">
             <h3>Price</h3>
+        </div>
+        <div class="table-cell">
+            <h3>Category</h3>
         </div>
         <div class="table-cell">
             <h3>IsActive</h3>
@@ -153,7 +156,10 @@
                 <p>@product.Price</p>
             </div>
             <div class="table-cell">
-                <a>@(product.IsActive ? "Active" : "Inactive")</a>
+                <p>@product.Category</p>
+            </div>
+            <div class="table-cell">
+                <a href="change-activity/@product.Id">@(product.IsActive ? "Active" : "Inactive")</a>
             </div>
             <div class="table-cell">
                 <a href="delete/@product.Id" class="btn btn-delete">DELETE</a>

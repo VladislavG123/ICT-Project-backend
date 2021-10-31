@@ -13,19 +13,18 @@ namespace ictFinalProject.WebAdmin
 {
     public class CookieAuthenticationService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+       private readonly IHttpContextAccessor httpContextAccessor;
 
         public CookieAuthenticationService(IHttpContextAccessor httpContext)
         {
-            this._httpContextAccessor = httpContext;
+            this.httpContextAccessor = httpContext;
         }
 
-        public async Task AuthenticateUser(string token)
+        public async Task<bool> AuthenticateUser(string token)
         {
             var claims = new List<Claim>
             {
-                new(ClaimTypes.Hash, token),
-                new(ClaimTypes.Name, "Admin")
+                new(ClaimTypes.Hash, token)
             };
 
             var claimsIdentity = new ClaimsIdentity(
@@ -34,28 +33,34 @@ namespace ictFinalProject.WebAdmin
             var authProperties = new AuthenticationProperties
             {
                 AllowRefresh = false,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1),
-                RedirectUri = "/"
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                RedirectUri = "/Home/Index"
             };
 
-            await _httpContextAccessor.HttpContext.SignInAsync(
+            await httpContextAccessor.HttpContext.SignInAsync(
                 Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
+
+
+            return true;
         }
 
         public async void SignOutUser()
         {
-            await _httpContextAccessor.HttpContext.SignOutAsync(
+            await httpContextAccessor.HttpContext.SignOutAsync(
                 Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public string DecryptClaim()
+        public List<Claim> DecryptClaim()
         {
-            var opt = _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IOptionsMonitor<Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>>();
-            var cookie = opt.CurrentValue.CookieManager.GetRequestCookie(_httpContextAccessor.HttpContext, ".AspNetCore.Cookies");
+            // Get the encrypted cookie value
+            var opt = httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IOptionsMonitor<Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>>();
+            var cookie = opt.CurrentValue.CookieManager.GetRequestCookie(httpContextAccessor.HttpContext, ".AspNetCore.Cookies");
 
+            // Decrypt if found
             if (string.IsNullOrEmpty(cookie)) return null;
+            
             var dataProtector = opt.CurrentValue.DataProtectionProvider.CreateProtector("Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware", Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme, "v2");
 
             var ticketDataFormat = new TicketDataFormat(dataProtector);
@@ -63,7 +68,7 @@ namespace ictFinalProject.WebAdmin
             var claims = ticket.Principal.Claims;
             var list = claims.ToList();
 
-            return list[0].Value;
+            return list;
         }
         
     }

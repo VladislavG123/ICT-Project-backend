@@ -1,0 +1,134 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Page</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .top-logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav {
+        background-color: lightgray;
+        height: 50px;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-btn {
+        text-decoration: none;
+        color: #3b3b3b;
+
+        display: flex;
+        align-items: center;
+
+        margin: 0 10px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+    .table-row {
+        display: flex;
+        justify-content: space-around;
+        height: 40px;
+    }
+
+    .table-cell {
+        display: flex;
+        align-items: center;
+        width: 50px;
+    }
+
+    .gray-row{
+        background-color: lightgray;
+    }
+    .btn-delete {
+        background: #da2333;
+        padding: 5px 10px;
+    }
+    .foot-menu{
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .btn {
+        padding: 0 30px;
+        border-radius: 15px;
+        color: white;
+        text-decoration: none;
+
+        display: flex;
+        align-items: center;
+        
+        background: #1b6ec2;
+    }
+</style>
+<body>
+<form asp-action="AddProduct" method="post">
+<div class="top-logo">
+    <img src="images/logo.png" height="150" alt="">
+</div>
+
+<div class="nav">
+    <a href="/" class="nav-btn bold">Products</a>
+    <a href="/order" class="nav-btn">Orders</a>
+</div>
+<div class="table-row gray-row">
+    <div class="table-cell">
+        <h3>Title</h3>
+    </div>
+    <div class="table-cell">
+        <h3>Details</h3>
+    </div>
+    <div class="table-cell">
+        <h3>Price</h3>
+    </div>
+    <div class="table-cell">
+        <h3>Category</h3>
+    </div>
+</div>
+
+<div class="table-row gray-row">
+    <div class="table-cell">
+        <div>
+            <input name="title" type="text">
+        </div>
+    </div>
+    <div class="table-cell">
+        <div>
+            <input name="details" type="text">
+        </div>
+    </div>
+    <div class="table-cell">
+        <div>
+            <input name="price" type="number">
+        </div>
+    </div>
+    <div class="table-cell">
+        <div>
+            <input name="category" type="text">
+        </div>
+    </div>
+</div>
+
+<div class="foot-menu">
+    <button type="submit" class="btn">Add</button>
+</div>
+</form>
+</body>
+</html>
