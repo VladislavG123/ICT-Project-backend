@@ -44,10 +44,13 @@ namespace IctFinalProject.Controllers
             }
             usersCart.IsActive = false;
 
+            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(orderCreationDto.DeliveryTime).ToLocalTime();
+            
             _context.Orders.Add(new Order()
             {
                 CartId = usersCart.Id,
-                DeliveryTime = orderCreationDto.DeliveryTime,
+                DeliveryTime = dateTime,
                 PhoneNumber = orderCreationDto.PhoneNumber
             });
 
